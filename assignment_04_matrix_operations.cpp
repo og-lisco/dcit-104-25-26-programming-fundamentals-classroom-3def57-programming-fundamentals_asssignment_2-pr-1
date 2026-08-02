@@ -57,11 +57,81 @@
 //
 
 // =============================================================================
-// YOUR CODE BELOW — remove the // symbols from the scaffold and fill it in
-// =============================================================================
-
 #include <iostream>
 #include <iomanip>
-#include <string>
 using namespace std;
+
+const int MAX = 10;
+
+// Read elements for a matrix
+void readMatrix(int mat[MAX][MAX], int r, int c) {
+    for (int i = 0; i < r; i++)
+        for (int j = 0; j < c; j++) {
+            cout << "Enter element [" << i << "][" << j << "]: ";
+            cin >> mat[i][j];
+        }
+}
+
+// Display matrix in a formatted grid
+void printMatrix(const int mat[MAX][MAX], int r, int c) {
+    for (int i = 0; i < r; i++) {
+        for (int j = 0; j < c; j++) cout << setw(5) << mat[i][j];
+        cout << endl;
+    }
+}
+
+// PART A: Transpose
+void transpose(const int src[MAX][MAX], int dest[MAX][MAX], int r, int c) {
+    for (int i = 0; i < r; i++)
+        for (int j = 0; j < c; j++) dest[j][i] = src[i][j];
+}
+
+// PART B: Add two matrices
+void add(const int A[MAX][MAX], const int B[MAX][MAX], int res[MAX][MAX], int r, int c) {
+    for (int i = 0; i < r; i++)
+        for (int j = 0; j < c; j++) res[i][j] = A[i][j] + B[i][j];
+}
+
+// PART C: Multiply two matrices (M x N * N x P)
+void multiply(const int A[MAX][MAX], const int B[MAX][MAX], int res[MAX][MAX], int M, int N, int P) {
+    for (int i = 0; i < M; i++) {
+        for (int j = 0; j < P; j++) {
+            res[i][j] = 0;
+            for (int k = 0; k < N; k++) res[i][j] += A[i][k] * B[k][j];
+        }
+    }
+}
+
+int main() {
+    int A[MAX][MAX], B[MAX][MAX], Res[MAX][MAX];
+    int r, c, M, N, P;
+
+    // --- Part A: Transpose ---
+    cout << "--- Part A: Transpose ---\nEnter rows and cols: ";
+    cin >> r >> c;
+    readMatrix(A, r, c);
+    transpose(A, Res, r, c);
+    cout << "\nOriginal:\n"; printMatrix(A, r, c);
+    cout << "\nTransposed:\n"; printMatrix(Res, c, r);
+
+    // --- Part B: Addition ---
+    cout << "\n--- Part B: Addition ---\nEnter rows and cols: ";
+    cin >> r >> c;
+    cout << "Matrix A:\n"; readMatrix(A, r, c);
+    cout << "Matrix B:\n"; readMatrix(B, r, c);
+    add(A, B, Res, r, c);
+    cout << "\nSum:\n"; printMatrix(Res, r, c);
+
+    // --- Part C: Multiplication ---
+    cout << "\n--- Part C: Multiplication ---\nEnter M, N, P: ";
+    cin >> M >> N >> P;
+    cout << "Matrix A (" << M << "x" << N << "):\n"; readMatrix(A, M, N);
+    cout << "Matrix B (" << N << "x" << P << "):\n"; readMatrix(B, N, P);
+    multiply(A, B, Res, M, N, P);
+    cout << "\nProduct:\n"; printMatrix(Res, M, P);
+
+    return 0;
+}
+// =============================================================================
+
 
