@@ -72,11 +72,57 @@
 
 //
 // =============================================================================
-// YOUR CODE BELOW — remove the // symbols from the scaffold and fill it in
-// =============================================================================
-
 #include <iostream>
 #include <vector>
 #include <string>
 using namespace std;
+
+void addTask(vector<string>& tasks) {
+    string t;
+    cout << "Enter task: ";
+    cin.ignore();
+    getline(cin, t);
+    tasks.push_back(t);
+    cout << "Task added: \"" << t << "\"\n";
+}
+
+void viewTasks(const vector<string>& tasks) {
+    if (tasks.empty()) { cout << "Your tasks list is currently empty.\n"; return; }
+    cout << "Your Tasks:\n";
+    for (size_t i = 0; i < tasks.size(); i++) 
+        cout << i + 1 << ". " << tasks[i] << "\n";
+}
+
+void deleteTask(vector<string>& tasks) {
+    int idx;
+    cout << "Enter task number to delete: ";
+    cin >> idx;
+    if (idx >= 1 && idx <= (int)tasks.size()) {
+        cout << "Task \"" << tasks[idx - 1] << "\" has been removed.\n";
+        tasks.erase(tasks.begin() + idx - 1);
+    } else {
+        cout << "Error: Invalid task number.\n";
+    }
+}
+
+int main() {
+    vector<string> tasks;
+    int choice = 0;
+    while (choice != 4) {
+        cout << "=================================\n         TO-DO LIST MENU\n=================================\n";
+        cout << "1. Add task\n2. View tasks\n3. Delete task\n4. Quit\nEnter your choice (1-4): ";
+        cin >> choice;
+        cout << "\n";
+        
+        if (choice == 1) addTask(tasks);
+        else if (choice == 2) viewTasks(tasks);
+        else if (choice == 3) deleteTask(tasks);
+        else if (choice == 4) cout << "Goodbye!\n";
+        else cout << "Invalid choice. Please enter a number between 1 and 4.\n";
+        cout << "\n";
+    }
+    return 0;
+}
+// =============================================================================
+;
 
