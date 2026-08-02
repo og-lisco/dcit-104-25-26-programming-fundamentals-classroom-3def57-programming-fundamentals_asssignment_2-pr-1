@@ -40,9 +40,49 @@
 //
 
 // =============================================================================
-// YOUR CODE BELOW — remove the // symbols from the scaffold and fill it in
-// =============================================================================
-
 #include <iostream>
 using namespace std;
+
+// Function to return letter grade or '\0' for invalid input
+char getGrade(int score) {
+    // Validate range: score must be between 0 and 100
+    if (score < 0 || score > 100) {
+        return '\0'; // Return null character for out-of-range scores
+    }
+    
+    // Determine letter grade based on the scale
+    if (score >= 80) {
+        return 'A';
+    } else if (score >= 70) {
+        return 'B';
+    } else if (score >= 60) {
+        return 'C';
+    } else if (score >= 50) {
+        return 'D';
+    } else {
+        return 'F';
+    }
+}
+
+int main() {
+    int score;
+
+    // Prompt user for input
+    cout << "Enter student score (0-100): ";
+    cin >> score;
+
+    // Call getGrade() and handle output
+    char grade = getGrade(score);
+
+    if (grade == '\0') {
+        cout << "Error: Score must be between 0 and 100." << endl;
+    } else {
+        cout << "Grade: " << grade << endl;
+    }
+
+    return 0;
+}
+// =============================================================================
+
+
 
